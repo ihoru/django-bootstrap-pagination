@@ -89,7 +89,10 @@ def get_page_url(page_num, current_app, url_view_name, url_extra_args, url_extra
         url_get_params = url_get_params.copy()
         if use_pg:
             use_pg = re.sub(r'\/pg\d+', '', use_pg)
-            url += '%s/pg%d' % (use_pg, page_num)
+            if page_num > 1:
+                url += '%s/pg%d' % (use_pg, page_num)
+            else:
+                url += use_pg
         else:
             url_get_params[url_param_name] = str(page_num)
 
